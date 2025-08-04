@@ -8,6 +8,15 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const compression = require("compression");
 const AppError = require("./utils/AppError");
+
+// Routes
+const authRoutes = require("./routes/authRoutes");
+const profileRoutes = require("./routes/profileRoutes");
+const medicalDataRoutes = require("./routes/medicalDataRoutes");
+const AiRoutes = require("./routes/AiRoutes");
+const globalErrorHandler = require("./controllers/errorController");
+
+const app = express();
 app.use(
   cors({
     origin: ["http://localhost:5173", "https://nuzan.netlify.app"],
@@ -22,15 +31,6 @@ app.use(
     ],
   })
 );
-// Routes
-const authRoutes = require("./routes/authRoutes");
-const profileRoutes = require("./routes/profileRoutes");
-const medicalDataRoutes = require("./routes/medicalDataRoutes");
-const AiRoutes = require("./routes/AiRoutes");
-const globalErrorHandler = require("./controllers/errorController");
-
-const app = express();
-
 // اگر پشت پروکسی هستید
 app.set("trust proxy", 1);
 
