@@ -8,7 +8,20 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const compression = require("compression");
 const AppError = require("./utils/AppError");
-
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://nuzan.netlify.app"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    credentials: true,
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "X-Requested-With",
+      "Accept",
+      "Origin",
+    ],
+  })
+);
 // Routes
 const authRoutes = require("./routes/authRoutes");
 const profileRoutes = require("./routes/profileRoutes");
@@ -23,20 +36,7 @@ app.set("trust proxy", 1);
 
 // ——— ۱) GLOBAL MIDDLEWARES ———
 // CORS
-app.use(
-  cors({
-    origin: ["http://localhost:5173", "https://nuzan.netlify.app/"],
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    credentials: true,
-    allowedHeaders: [
-      "Content-Type",
-      "Authorization",
-      "X-Requested-With",
-      "Accept",
-      "Origin",
-    ],
-  })
-);
+
 // فایل‌های ایستا
 app.use("/uploads", express.static("uploads"));
 // هِدِرهای امنیتی
